@@ -1,7 +1,7 @@
 version: '3.1'
 
 volumes:
-  db_data:
+  dockerfile_editor:
 
 services:
   php:
@@ -22,11 +22,11 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: MY_PASSWORD
-      MYSQL_DATABASE: MY_DATABASE
-      MYSQL_USER: MY_USER
+      MYSQL_DATABASE: dockerfile_editor
+      MYSQL_USER: dockerfile_editor
       MYSQL_PASSWORD: MY_PASSWORD
     volumes:
-      - db_data:/var/lib/mysql
+      - dockerfile_editor:/var/lib/mysql
 
   adminer:
     image: adminer
