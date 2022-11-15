@@ -1,0 +1,5 @@
+{
+  "lit-plugin.dontShowSuggestions": false,
+  "lit-plugin.rules.no-incompatible-type-binding": "off",
+  "lit-plugin.strict": true
+}
