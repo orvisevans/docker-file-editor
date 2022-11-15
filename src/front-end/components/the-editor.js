@@ -1,31 +1,21 @@
-import { html, LitElement } from "../vendors/lit.js";
-import "./editor-steps.js";
+import { addStep } from "../stores/steps.js";
 
-let id = 0;
-
-export class TheEditor extends LitElement {
-  static properties = {
-    steps: { type: Array, state: true },
-  };
-
-  addStep() {
-    console.log("addStep");
-    this.steps = [...this.steps, { id: id++ }];
-  }
-
+export class TheEditor extends HTMLElement {
   constructor() {
     super();
-    this.steps = [];
-  }
+    const shadow = this.attachShadow({ mode: "open" });
 
-  render() {
-    return html`
+    const html = /* html */ `
       <div>
         <h2>Editor</h2>
-        <button @click=${this.addStep}>+</button>
-        <editor-steps .steps=${this.steps}></editor-steps>
+        <button id="add-step">+</button>
+        <editor-steps></editor-steps>
       </div>
     `;
+
+    shadow.innerHTML = html;
+
+    shadow.getElementById("add-step").addEventListener("click", addStep);
   }
 }
 

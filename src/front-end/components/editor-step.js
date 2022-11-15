@@ -1,17 +1,19 @@
-import { html, LitElement } from "../vendors/lit.js";
+import { state } from "../stores/steps.js";
 
-export class EditorStep extends LitElement {
-  static properties = {
-    step: { type: Object },
-  };
-
+export class EditorStep extends HTMLElement {
   constructor() {
     super();
-    this.step = {};
+    this.shadow = this.attachShadow({ mode: "open" });
+    this.render();
   }
 
   render() {
-    return html`<div>${this.step.id}</div>`;
+    const key = this.getAttribute("key");
+    const step = state.steps[key];
+
+    const html = /*html*/ `<div>${step.id}</div>`;
+
+    this.shadow.innerHTML = html;
   }
 }
 

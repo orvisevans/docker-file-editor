@@ -1,22 +1,23 @@
-import { html, LitElement, repeat } from "/vendors/lit.js";
-import "./editor-step.js";
+import { state, subscribe } from "../stores/steps.js";
 
-export class EditorSteps extends LitElement {
-  static properties = {
-    steps: { type: Array },
-  };
-
+export class EditorSteps extends HTMLElement {
   constructor() {
     super();
-    this.steps = [];
+    this.shadow = this.attachShadow({ mode: "open" });
+    subscribe(this.render.bind(this));
+    this.render();
   }
 
   render() {
-    return repeat(
-      this.steps,
-      (step) => step.id,
-      (step) => html`<editor-step .step=${step} />`
-    );
+    const html = state.stepIds
+      .map(
+        (id) => /* html */ `
+        <editor-step key="${id}"></editor-step>
+        `
+      )
+      .join("");
+
+    this.shadow.innerHTML = html;
   }
 }
 
