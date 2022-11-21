@@ -1,26 +1,12 @@
+import { createStore } from "./store.js";
+
 let id = 0;
-let steps = [];
-let subscribers = [];
+const initialState = { steps: [] };
 
-export const state = {
-  get steps() {
-    return steps;
-  },
+export const steps = createStore(initialState);
 
-  set steps(value) {
-    steps = value;
-    subscribers.forEach((fn) => fn());
-  },
-
-  get stepIds() {
-    return this.steps.map((step) => step.id);
-  },
-};
-
-export const subscribe = (subscriber) => {
-  subscribers.push(subscriber);
-};
-
-export const addStep = () => {
-  state.steps = [...state.steps, { id: id++ }];
-};
+// Actions
+export function addStep() {
+  steps.steps = [...steps.steps, createStep()];
+}
+const createStep = () => createStore({ id: id++ });

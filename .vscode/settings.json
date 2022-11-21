@@ -1,5 +1,12 @@
 {
   "lit-plugin.dontShowSuggestions": false,
   "lit-plugin.rules.no-incompatible-type-binding": "off",
-  "lit-plugin.strict": true
+  "lit-plugin.strict": true,
+  "liveServer.settings.port": 5555,
+  "liveServer.settings.proxy": {
+    "enable": true,
+    "baseUri": "/api",
+    "proxyUri": "http://127.0.0.1:8000/api"
+  },
+  "liveServer.settings.root": "/src/front-end"
 }

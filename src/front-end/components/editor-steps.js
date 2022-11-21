@@ -1,15 +1,20 @@
-import { state, subscribe } from "../stores/steps.js";
+import { steps } from "../stores/steps.js";
 
 export class EditorSteps extends HTMLElement {
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: "open" });
-    subscribe(this.render.bind(this));
+    steps.$subscribe(this.render.bind(this));
     this.render();
   }
 
+  disconnectedCallback() {
+    steps.$unsubscribe(this.render);
+  }
+
   render() {
-    const html = state.stepIds
+    const html = steps.steps
+      .map((step) => step.id)
       .map(
         (id) => /* html */ `
         <editor-step key="${id}"></editor-step>

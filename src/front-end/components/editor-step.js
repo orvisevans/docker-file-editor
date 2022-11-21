@@ -1,4 +1,4 @@
-import { state } from "../stores/steps.js";
+import { steps } from "../stores/steps.js";
 
 export class EditorStep extends HTMLElement {
   constructor() {
@@ -7,11 +7,16 @@ export class EditorStep extends HTMLElement {
     this.render();
   }
 
-  render() {
+  async render() {
     const key = this.getAttribute("key");
-    const step = state.steps[key];
+    const step = steps.steps[key];
 
-    const html = /*html*/ `<div>${step.id}</div>`;
+    const html = /*html*/ `
+      <div>
+        ${step.id}
+        <select-instruction></select-instruction>
+      </div>
+    `;
 
     this.shadow.innerHTML = html;
   }
